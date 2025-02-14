@@ -1,4 +1,4 @@
-import Question from "./components/Question/Question";
+import Question from "./components/Question";
 
 export default function Home() {
   return (
