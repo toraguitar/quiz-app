@@ -22,13 +22,20 @@
   gap: 20px;
 }
 .quizApp__listButton {
-  padding: 12px 16px;
   text-align: center;
   border-radius: 6px;
   color: #ffffff;
   font-size: 20px;
   min-width: 250px;
-  background-color: #ea6077;
+  background-color: #f0a1ae;
+}
+.quizApp__listButton:has(input:checked) {
+  background-color: #e4007f;
+}
+.quizApp__listLabel {
+  display: block;
+  padding: 12px 16px;
+  width: 100%;
 }
 .quizApp__nextButton {
   display: block;
@@ -40,6 +47,10 @@
   font-weight: 700;
   font-size: 16px;
   background-color: #3985d0;
+}
+.quizApp__nextButton:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
 }
 
 /*# sourceMappingURL=style.css.map */

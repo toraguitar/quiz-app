@@ -13,6 +13,8 @@ type Question = {
 export default function QuizApp() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [score, setScore] = useState(0);
 
   /**
    * 問題番号をランダムに3つ出す
@@ -33,6 +35,9 @@ export default function QuizApp() {
     return numList;
   };
 
+  /**
+   * ランダムに生成した番号を元にクイズをセットする
+   */
   useEffect(() => {
     const quizList: Question[] = [];
     const numberList = getNumbers();
@@ -41,6 +46,15 @@ export default function QuizApp() {
     }
     setQuestions(quizList);
   }, []);
+
+  // 回答選択のハンドラー
+  const handleAnswerSelect = (answer: string) => {
+    setSelectedAnswer(answer);
+  }
+
+  const handleNextQuestion = () => {
+      setScore(score + 1);
+  }
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -55,12 +69,14 @@ export default function QuizApp() {
       <ul className="quizApp__list">
       {currentQuestion.options.map((option, index) => (
         <li key={index}>
-          <button type="button" className="quizApp__listButton" key={index}>
-            <label key={index}>
+          <button type="submit" className="quizApp__listButton" key={index}>
+            <label className="quizApp__listLabel" key={index}>
               <input
                 type="radio"
                 name="answer"
                 value={option}
+                checked={selectedAnswer === option}
+                onChange={() => handleAnswerSelect(option)}
               />
               {option}
             </label>
@@ -68,7 +84,7 @@ export default function QuizApp() {
         </li>
       ))}
       </ul>
-      <button className="quizApp__nextButton">
+      <button className="quizApp__nextButton" onClick={handleNextQuestion} disabled={selectedAnswer === ''}>
         次の問題へ
       </button>
     </div>

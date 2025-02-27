@@ -25,13 +25,22 @@
   }
 
   &__listButton {
-    padding: 12px 16px;
     text-align: center;
     border-radius: 6px;
     color: #ffffff;
     font-size: 20px;
     min-width: 250px;
-    background-color: #ea6077;
+    background-color: #f0a1ae;
+
+    &:has(input:checked) {
+      background-color: #e4007f;
+    }
+  }
+
+  &__listLabel {
+    display: block;
+    padding: 12px 16px;
+    width: 100%;
   }
 
   &__nextButton {
@@ -44,5 +53,10 @@
     font-weight: 700;
     font-size: 16px;
     background-color: #3985d0;
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #ccc;
+    }
   }
 }
