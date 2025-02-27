@@ -40,7 +40,6 @@ export default function QuizApp() {
       quizList.push(data[numberList[i]]);
     }
     setQuestions(quizList);
-    console.log(quizList);
   }, []);
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -54,20 +53,22 @@ export default function QuizApp() {
       </h2>
       <p className="quizApp__questionTitle">{currentQuestion.question}</p>
       <ul className="quizApp__list">
-        <li className="quizApp__listItem">
-        {currentQuestion.options.map((option, index) => (
-          <label key={index} className="">
-            <input
-              type="radio"
-              name="answer"
-              value={option}
-            />
-            {option}
-          </label>
-        ))}
+      {currentQuestion.options.map((option, index) => (
+        <li key={index}>
+          <button type="button" className="quizApp__listButton" key={index}>
+            <label key={index}>
+              <input
+                type="radio"
+                name="answer"
+                value={option}
+              />
+              {option}
+            </label>
+          </button>
         </li>
+      ))}
       </ul>
-      <button className="">
+      <button className="quizApp__nextButton">
         次の問題へ
       </button>
     </div>

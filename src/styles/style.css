@@ -1,16 +1,45 @@
-.quiz-question__container {
+.quizApp {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  background-color: #f9f9f9;
+  padding: 40px 12px;
+  background-color: #fdecee;
+  font-family: "Hiragino Sans", sans-serif;
+  color: #202020;
 }
-.quiz-question__title {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 30px;
+.quizApp__title {
+  font-size: 32px;
+}
+.quizApp__questionTitle {
+  margin-top: 32px;
+  font-size: 20px;
+}
+.quizApp__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 20px;
+}
+.quizApp__listButton {
+  padding: 12px 16px;
+  text-align: center;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 20px;
+  min-width: 250px;
+  background-color: #ea6077;
+}
+.quizApp__nextButton {
+  display: block;
+  margin: 40px auto 0;
+  padding: 12px 20px;
+  width: fit-content;
+  border-radius: 6px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #3985d0;
 }
 
 /*# sourceMappingURL=style.css.map */
