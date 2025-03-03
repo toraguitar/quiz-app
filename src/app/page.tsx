@@ -53,7 +53,12 @@ export default function QuizApp() {
   }
 
   const handleNextQuestion = () => {
+    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
       setScore(score + 1);
+    }
+
+    setCurrentQuestionIndex(currentQuestionIndex + 1)
+    setSelectedAnswer('');
   }
 
   const currentQuestion = questions[currentQuestionIndex];
