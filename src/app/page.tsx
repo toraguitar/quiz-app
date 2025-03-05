@@ -15,6 +15,7 @@ export default function QuizApp() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [score, setScore] = useState(0);
+  const [isEnd, setIsEnd] = useState(false);
 
   /**
    * 問題番号をランダムに3つ出す
@@ -50,20 +51,29 @@ export default function QuizApp() {
   // 回答選択のハンドラー
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
-  }
+  };
 
   const handleNextQuestion = () => {
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
       setScore(score + 1);
     }
-
-    setCurrentQuestionIndex(currentQuestionIndex + 1)
-    setSelectedAnswer('');
-  }
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedAnswer('');
+    } else {
+      setIsEnd(true);
+    }
+  };
 
   const currentQuestion = questions[currentQuestionIndex];
 
   if (questions.length === 0) return;
+
+  if(isEnd) {
+    return (
+      <div>終わり</div>
+    );
+  }
 
   return (
     <div className="quizApp">
@@ -72,22 +82,22 @@ export default function QuizApp() {
       </h2>
       <p className="quizApp__questionTitle">{currentQuestion.question}</p>
       <ul className="quizApp__list">
-      {currentQuestion.options.map((option, index) => (
-        <li key={index}>
-          <button type="submit" className="quizApp__listButton" key={index}>
-            <label className="quizApp__listLabel" key={index}>
-              <input
-                type="radio"
-                name="answer"
-                value={option}
-                checked={selectedAnswer === option}
-                onChange={() => handleAnswerSelect(option)}
-              />
-              {option}
-            </label>
-          </button>
-        </li>
-      ))}
+        {currentQuestion.options.map((option, index) => (
+          <li key={index}>
+            <button type="submit" className="quizApp__listButton" key={index}>
+              <label className="quizApp__listLabel" key={index}>
+                <input
+                  type="radio"
+                  name="answer"
+                  value={option}
+                  checked={selectedAnswer === option}
+                  onChange={() => handleAnswerSelect(option)}
+                />
+                {option}
+              </label>
+            </button>
+          </li>
+        ))}
       </ul>
       <button className="quizApp__nextButton" onClick={handleNextQuestion} disabled={selectedAnswer === ''}>
         次の問題へ
