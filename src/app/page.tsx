@@ -48,11 +48,17 @@ export default function QuizApp() {
     setQuestions(quizList);
   }, []);
 
-  // 回答選択のハンドラー
+  /**
+   * 回答者が選んだ答えをselectedAnswerにセットする
+   * @param {string} answer 回答者の回答
+   */
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
   };
 
+  /**
+   * 「次の問題へ」を押下した際の挙動を制御する
+   */
   const handleNextQuestion = () => {
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
       setScore(score + 1);
@@ -65,13 +71,32 @@ export default function QuizApp() {
     }
   };
 
+  const resetQuiz = () => {
+    const quizList: Question[] = [];
+    const numberList = getNumbers();
+    for (let i = 0; i < numberList.length; i++) {
+      quizList.push(data[numberList[i]]);
+    }
+    setQuestions(quizList);
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer('');
+    setScore(0);
+    setIsEnd(false);
+  };
+
   const currentQuestion = questions[currentQuestionIndex];
 
   if (questions.length === 0) return;
 
   if(isEnd) {
     return (
-      <div>終わり</div>
+    <div className="quizApp">
+      <h2 className="quizApp__title">クイズ結果</h2>
+      <p className="quizApp__result">{score} / {questions.length} 問正解</p>
+      <button onClick={resetQuiz} className="quizApp__nextButton">
+        もう一度挑戦する
+      </button>
+    </div>
     );
   }
 
